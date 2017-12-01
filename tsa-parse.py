@@ -25,8 +25,8 @@ repl = ('<p>', ''), ('</p>', ''), ('\n', ''), ('\r', ''), ('<br>', '')
 def handle_none(t):
     if t:
         for r in repl:
-            t = t.replace(*r).strip()
-        return t
+            t = t.replace(*r)
+        return t.strip()
     else:
         return ''
 
@@ -55,15 +55,14 @@ def parse_xml(tsa_xml):
             description = handle_none(thing.find('Description').text)
             keywords = handle_none(thing.find('Item-Keywords').text)
 
-            if name:
-                writer.writerow({
-                    'name': name,
-                    'category': category,
-                    'carryon': carryon,
-                    'checked': checked,
-                    'description': description,
-                    'keywords': keywords
-                })
+            writer.writerow({
+                'name': name,
+                'category': category,
+                'carryon': carryon,
+                'checked': checked,
+                'description': description,
+                'keywords': keywords
+            })
 
 
 if __name__ == '__main__':
